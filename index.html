@@ -1,29 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Arena Game</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <div class="game-container">
-        <h1>⚔️ Arena Game</h1>
 
-        <div class="game-info">
-            <span>❤️ Health: <b id="health">100</b></span>
-            <span>⭐ Score: <b id="score">0</b></span>
-        </div>
+        <header class="game-header">
 
-        <div id="arena">
+            <h1>⚔️ Arena Game</h1>
+
+            <div class="game-info">
+
+                <div class="stat">
+                    ❤️ Health:
+                    <span id="health">100</span>
+                </div>
+
+                <div class="stat">
+                    ⭐ Score:
+                    <span id="score">0</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <main id="arena">
+
             <div id="player"></div>
+
+            <div id="game-message" class="hidden">
+
+                <h2 id="message-title">GAME OVER</h2>
+
+                <p>
+                    Final Score:
+                    <span id="final-score">0</span>
+                </p>
+
+                <button id="restartBtn">
+                    🔄 Play Again
+                </button>
+
+            </div>
+
+        </main>
+
+
+        <div class="controls">
+
+            <button id="startBtn">
+                ▶️ Start Game
+            </button>
+
+            <p>
+                Move: <strong>WASD</strong> / <strong>Arrow Keys</strong>
+                &nbsp; | &nbsp;
+                Attack: <strong>SPACE</strong>
+            </p>
+
         </div>
 
-        <button id="startBtn">Start Game</button>
     </div>
 
+
     <script src="script.js"></script>
+
 </body>
+
 </html>
