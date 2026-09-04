@@ -10,6 +10,7 @@ const playerSpeed = 2;
 let score = 0;
 let enemies = [];
 
+
 // =========================
 // PLAYER MOVEMENT
 // =========================
@@ -41,7 +42,7 @@ document.addEventListener("keydown", (event) => {
 
 
 // =========================
-// ENEMY SPAWNING
+// SPAWN ENEMY
 // =========================
 
 function spawnEnemy() {
@@ -58,9 +59,42 @@ function spawnEnemy() {
 
     arena.appendChild(enemy);
 
-    enemies.push(enemy);
+    enemies.push({
+        element: enemy,
+        x: x,
+        y: y
+    });
 }
 
 
-// Spawn an enemy every 2 seconds
+// Spawn enemy every 2 seconds
 setInterval(spawnEnemy, 2000);
+
+
+// =========================
+// ENEMY MOVEMENT
+// =========================
+
+function moveEnemies() {
+
+    enemies.forEach((enemy) => {
+
+        const dx = playerX - enemy.x;
+        const dy = playerY - enemy.y;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > 2) {
+
+            enemy.x += (dx / distance) * 0.15;
+            enemy.y += (dy / distance) * 0.15;
+
+            enemy.element.style.left = enemy.x + "%";
+            enemy.element.style.top = enemy.y + "%";
+        }
+    });
+
+    requestAnimationFrame(moveEnemies);
+}
+
+moveEnemies();
