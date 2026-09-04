@@ -4,58 +4,313 @@
     box-sizing: border-box;
 }
 
+
 body {
     min-height: 100vh;
-    background: #111;
+
+    background: #101018;
+
     color: white;
+
     font-family: Arial, sans-serif;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
+    padding: 20px;
 }
 
+
 .game-container {
-    width: 90%;
+    width: 100%;
+
     max-width: 900px;
+
     text-align: center;
 }
 
-h1 {
-    margin-bottom: 20px;
+
+.game-header {
+    margin-bottom: 15px;
 }
+
+
+.game-header h1 {
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
 
 .game-info {
     display: flex;
+
     justify-content: space-between;
-    margin-bottom: 10px;
+
+    background: #1c1c28;
+
+    border: 2px solid #333344;
+
+    border-radius: 10px;
+
+    padding: 12px 20px;
+
     font-size: 18px;
 }
 
+
+.stat span {
+    font-weight: bold;
+}
+
+
 #arena {
     position: relative;
+
     width: 100%;
+
     height: 500px;
-    background: #222;
-    border: 3px solid white;
+
+    background: #181824;
+
+    border: 3px solid #555566;
+
+    border-radius: 12px;
+
     overflow: hidden;
+
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
 }
+
+
+/* Arena grid */
+
+#arena::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(#ffffff08 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+
+    background-size: 40px 40px;
+
+    pointer-events: none;
+}
+
+
+/* PLAYER */
 
 #player {
     position: absolute;
-    width: 35px;
-    height: 35px;
+
+    width: 36px;
+
+    height: 36px;
+
     background: dodgerblue;
+
+    border: 3px solid white;
+
     border-radius: 50%;
 
-    left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%);
+
+    z-index: 10;
+
+    box-shadow: 0 0 15px #168cff;
+
+    transition: background 0.1s;
 }
 
-#startBtn {
-    margin-top: 20px;
+
+/* ENEMY */
+
+.enemy {
+    position: absolute;
+
+    width: 30px;
+
+    height: 30px;
+
+    background: crimson;
+
+    border: 2px solid white;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    box-shadow: 0 0 10px #ff1744;
+}
+
+
+/* ATTACK EFFECT */
+
+.attack-effect {
+    position: absolute;
+
+    width: 70px;
+
+    height: 70px;
+
+    border: 4px solid yellow;
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    z-index: 8;
+
+    animation: attackAnimation 0.2s ease-out forwards;
+}
+
+
+@keyframes attackAnimation {
+
+    from {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+
+    to {
+        width: 90px;
+        height: 90px;
+        opacity: 0;
+    }
+
+}
+
+
+/* CONTROLS */
+
+.controls {
+    margin-top: 18px;
+}
+
+
+button {
+    border: none;
+
+    border-radius: 8px;
+
     padding: 12px 25px;
+
+    background: #2864dc;
+
+    color: white;
+
     font-size: 16px;
+
+    font-weight: bold;
+
     cursor: pointer;
+}
+
+
+button:hover {
+    background: #3975ee;
+}
+
+
+.controls p {
+    margin-top: 12px;
+
+    color: #aaaaaa;
+
+    font-size: 14px;
+}
+
+
+/* GAME OVER */
+
+#game-message {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 50;
+}
+
+
+#game-message h2 {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+}
+
+
+#game-message p {
+    font-size: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* DAMAGE EFFECT */
+
+.damage {
+    animation: damageAnimation 0.15s;
+}
+
+
+@keyframes damageAnimation {
+
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    #arena {
+        height: 400px;
+    }
+
+    .game-header h1 {
+        font-size: 26px;
+    }
+
+    .game-info {
+        font-size: 15px;
+    }
+
 }
