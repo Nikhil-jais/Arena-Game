@@ -33,6 +33,7 @@ document.addEventListener("keydown", (event) => {
         playerX += playerSpeed;
     }
 
+    // Keep player inside the arena
     playerX = Math.max(2, Math.min(98, playerX));
     playerY = Math.max(4, Math.min(96, playerY));
 
@@ -42,7 +43,7 @@ document.addEventListener("keydown", (event) => {
 
 
 // =========================
-// SPAWN ENEMY
+// ENEMY SPAWNING
 // =========================
 
 function spawnEnemy() {
@@ -67,7 +68,7 @@ function spawnEnemy() {
 }
 
 
-// Spawn enemy every 2 seconds
+// Spawn an enemy every 2 seconds
 setInterval(spawnEnemy, 2000);
 
 
@@ -98,3 +99,41 @@ function moveEnemies() {
 }
 
 moveEnemies();
+
+
+// =========================
+// PLAYER ATTACK
+// =========================
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.code === "Space") {
+
+        attack();
+    }
+});
+
+
+function attack() {
+
+    const attackRange = 8;
+
+    enemies.forEach((enemy, index) => {
+
+        const dx = playerX - enemy.x;
+        const dy = playerY - enemy.y;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance <= attackRange) {
+
+            enemy.element.remove();
+
+            enemies.splice(index, 1);
+
+            score++;
+
+            scoreDisplay.textContent = score;
+        }
+    });
+}
